@@ -81,7 +81,7 @@ docker run --name kc -d -p 8080:8080 -p 8443:8443 \
         - https://github.com/auth0/node-jsonwebtoken/issues/530
         - 上記記事にある react-native-pure-jwt は動作するアルゴリズムが限定的な模様
         - https://github.com/zaguiini/react-native-pure-jwt/issues/10
-    - cloud functionにjwtの中身のsub clamを投げているが、id tokenごと投げて、cloud function側で検証したほうが良いかも
+    - cloud functionにjwtの中身のsub claimを投げているが、id tokenごと投げて、cloud function側で検証したほうが良いかも
         - Firebase Admin SDK(cloud function上で使えるSDK)は検証ライブラリを提供している模様
         - https://firebase.google.com/docs/auth/admin/verify-id-tokens?hl=ja
     - cloud functionのGETのパラメータでid tokenを投げると128文字を越えてますとエラーが出るので、POST APIを別で作れば解決する？
