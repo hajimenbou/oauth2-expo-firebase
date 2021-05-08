@@ -85,5 +85,5 @@ docker run --name kc -d -p 8080:8080 -p 8443:8443 \
         - ここはまだ試せていない
 - expoとkeycloakに登録するredirect urlについて
     - redirect url は standalone で動作させると、expoの仕様でapp.jsonのschemeに登録している名前のurl schemaに飛ぶようになる
-    - ただ、例えば myexpoapp:// だけではkeycloak側の仕様のためか登録できなかったので、myexpoapp://login と特に設定していないroutingを設定したところ動作した
-    - /loginページが別であるとそちらにリダイレクトする可能性があるが、アプリにないroutingなら大丈夫そうではあるが、強引にやってる感がある
+    - ただ、例えば myexpoapp:// だけではkeycloak側の仕様のためか登録できなかったので、myexpoapp://login と特にexpo上では設定していないroutingを設定したところ動作した
+    - ログイン後飛ばしたいページがあると思うのでそれを指定すれば大丈夫そうではある、、これはテスト用なので1ページしかなく、強引にやってる感はある
