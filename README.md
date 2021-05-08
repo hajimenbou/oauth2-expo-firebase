@@ -1,20 +1,21 @@
 ### 概要
 
-- expo + firebase authorizationの連携のテスト
+- expo + Firebase Authenticationの連携のテスト
 - firebase authは独自で立ち上げたopenid connectサーバーと連携してカスタム認証機能を使う
-- iosでしか試せていない
+- iosでしか試していない
 
 ### 構成
 
-- クライアントアプリ(client/)
-    - expo + firebase
-    - keycloakとopenid connectで認証して取得したid tokenを使ってfirebase authのカスタム認証を行う
 - 認可サーバー(authorization-server/)
     - keycloak
     - wifiのIPを使い、localhostにdockerで環境を作る
-- firebaseと認可サーバーを繋ぐサーバー(server/)
-    - cloud function
-    - カスタム認証を行う際、firebase authとのやり取りでcloud functionでしか使えない関数があるので、ユーザー固有値からカスタムトークンを作成する機能を担う
+- カスタムトークンを作成するサーバー(server/)
+    - Cloud Functions
+    - カスタムトークンの作成はCloud Functionsで行う必要がある
+    - ユーザー固有値からカスタムトークンを作成するAPIを提供する
+- クライアントアプリ(client/)
+    - expo + firebase
+    - keycloakとopenid connectで認証して取得したid tokenを使ってfirebase authのカスタム認証を行う
 
 #### 認可サーバー(keycloak)の起動
 
@@ -37,11 +38,13 @@ docker run --name kc -d -p 8080:8080 -p 8443:8443 \
   jboss/keycloak
 ```
 - ブラウザでhttps://<wifiのアドレス>:8443にアクセスできれば成功
+- Administration Console -> login(admin:secret) -> Clients -> demo-client を開く
+- Valid Redirect URIsに exp://<wifiのアドレス>:19000/--/login を登録する
 
-### cloud functionにapiを作成する
+### Cloud Functionsにapiを作成する
 
 - firebase側でプロジェクトを作成する
-    - cloud functionはfreeプランだと使えないので、breazeプランに変更する必要がある
+    - Cloud Functionsはfreeプランだと使えないので、BLAZEプランに変更する必要がある
 - ソースを対象プロジェクトにデプロイする
     - cd server
     - firebase init
@@ -68,7 +71,7 @@ docker run --name kc -d -p 8080:8080 -p 8443:8443 \
 - standalone版を作成する
     - apple developerの設定が別途必要
     - expo build:iosでipaファイルを作成する
-    - transpoter.appでipaファイルをデリバリする
+    - Transpoter.appでipaファイルをデリバリする
 
 ## 懸念点
 
