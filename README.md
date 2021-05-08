@@ -1,10 +1,10 @@
-### 概要
+## 概要
 
 - expo + Firebase Authenticationの連携のテスト
 - firebase authは独自で立ち上げたopenid connectサーバーと連携してカスタム認証機能を使う
 - iosでしか試していない
 
-### 構成
+## 構成
 
 - 認可サーバー(authorization-server/)
     - keycloak
@@ -17,7 +17,7 @@
     - expo + firebase
     - keycloakとopenid connectで認証して取得したid tokenを使ってfirebase authのカスタム認証を行う
 
-#### 認可サーバー(keycloak)の起動
+### 認可サーバー(keycloak)の起動
 
 > 参考
 > https://zenn.dev/backpaper0/articles/keycloak-getting-started
